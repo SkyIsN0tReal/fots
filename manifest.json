@@ -1,0 +1,17 @@
+{
+    "name": "ftos",
+    "description": "Base Level Extension",
+
+    "version": "1.0",
+    "manifest_version": 3,
+  
+
+    "permissions": ["contextMenus"],
+    "background": { "service_worker": "/context_menu.js"},
+
+     "action": {
+      "default_popup": "index.html",
+      "default_icon": "/small.jpg"
+    }
+}
+  

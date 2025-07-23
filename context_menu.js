@@ -19,7 +19,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   chrome.notifications?.create({
     type: "basic",
     iconUrl: "planner.png",
-    title: "Copied!",
+    title: "Copied",
     message: "Now click the extension icon to view your copied text."
   });
 });

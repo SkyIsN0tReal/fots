@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTOS - Summarize</title>
+    <!-- import tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- import jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+    <!-- Floating Pill Navbar -->
+    <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black bg-opacity-70 backdrop-blur-md rounded-full border border-gray-600 shadow-lg px-6 py-3">
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="pill-btn pill-btn-home">
+                <span class="text-sm font-medium">Home</span>
+            </a>
+            <a href="about.html" class="pill-btn pill-btn-home">
+                <span class="text-sm font-medium">About</span>
+            </a>
+            <a href="fots.html" class="pill-btn pill-btn-active">
+                <span class="text-sm font-medium">Check it out</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center min-h-screen text-white p-4 sm:p-8 pt-20 sm:pt-24">
+        <div class="max-w-4xl w-full text-center animate__animated animate__fadeIn">
+            <div id="inputSection">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Summarize Terms of Service</h1>
+                <p class="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8">
+                    Paste the Terms of Service text below to get a summary and a score.
+                </p>
+                <textarea id="tosInput" class="w-full h-48 sm:h-64 p-3 sm:p-4 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-white text-sm sm:text-base" placeholder="Paste your Terms of Service here..."></textarea>
+                <button id="submitBtn" class="github-btn github-btn-primary mt-4 w-full sm:w-auto">
+                    <span>Submit</span>
+                </button>
+            </div>
+
+            <div id="loadingSection" class="mt-8 text-center" style="display: none;">
+                <div class="inline-flex items-center space-x-2">
+                    <div class="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-white"></div>
+                    <span class="text-base sm:text-lg">Analyzing Terms of Service...</span>
+                </div>
+            </div>
+
+            <div id="resultsContainer" class="mt-6 sm:mt-8 text-left p-4 sm:p-6 rounded-md bg-gray-800 border border-gray-700" style="display: none;">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4">Results</h2>
+                <p class="text-lg sm:text-xl mb-2"><strong>Score:</strong> <span id="score" class="font-bold text-yellow-400"></span>/10</p>
+                <ul class="list-disc list-inside space-y-2 text-sm sm:text-base">
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                    <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                    <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</li>
+                </ul>
+                <div class="text-center mt-6">
+                    <button id="submitAnotherBtn" class="github-btn github-btn-secondary w-full sm:w-auto">
+                        <span>Submit Another</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-image: url('bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overscroll-behavior: none;
+    }
+    
+    /* Pill Navigation Styles */
+    .pill-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        white-space: nowrap;
+    }
+    
+    .pill-btn-home {
+        color: #e5e7eb;
+    }
+    
+    .pill-btn-home:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    .pill-btn-active {
+        background: #FFD700;
+        color: #333333;
+    }
+    
+    .pill-btn-active:hover {
+        background: #DAA520;
+        transform: translateY(-1px);
+    }
+    
+    .github-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 6px;
+        border: 1px solid;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        overflow: hidden;
+        min-width: 120px;
+    }
+    
+    .github-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        transition: left 0.5s;
+    }
+    
+    .github-btn:hover:before {
+        left: 100%;
+    }
+    
+    .github-btn-primary {
+        background: #FFD700;
+        border-color: #FFD700;
+        color: #333333;
+    }
+    
+    .github-btn-primary:hover {
+        background: #DAA520;
+        border-color: #DAA520;
+        color: #333333;
+        transform: translateY(-1px);
+    }
+    
+    .github-btn-secondary {
+        background: transparent;
+        border-color: #6b7280;
+        color: #e5e7eb;
+    }
+    
+    .github-btn-secondary:hover {
+        background: rgba(107, 114, 128, 0.1);
+        border-color: #9ca3af;
+        transform: translateY(-1px);
+    }
+    
+    .github-btn:active {
+        transform: translateY(0);
+    }
+
+    /* Media Queries */
+    @media (min-width: 640px) {
+        .github-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 639px) {
+        .github-btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        nav {
+            padding: 8px 16px;
+        }
+        
+        .pill-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        #resultsContainer {
+            text-align: center;
+        }
+        
+        #resultsContainer ul {
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 480px) {
+        nav {
+            top: 16px;
+            padding: 6px 12px;
+        }
+        
+        .pill-btn {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+        
+        nav .flex {
+            gap: 8px;
+        }
+        
+        h1 {
+            font-size: 1.875rem;
+        }
+        
+        textarea {
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .pill-btn span {
+            font-size: 10px;
+        }
+        
+        nav {
+            padding: 4px 8px;
+        }
+        
+        .github-btn {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $("#submitBtn").click(function() {
+            $("#inputSection").slideUp();
+            $("#loadingSection").slideDown();
+            
+            setTimeout(function() {
+                var score = Math.floor(Math.random() * 10) + 1;
+                $("#score").text(score);
+                $("#loadingSection").slideUp();
+                $("#resultsContainer").slideDown();
+            }, 2000); // Simulate a 2-second loading time
+        });
+
+        $("#submitAnotherBtn").click(function() {
+            location.reload();
+        });
+    });
+</script>
+</html>

@@ -8,23 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-    <div class="flex flex-col items-center justify-center min-h-screen text-white p-8">
+    <!-- Floating Pill Navbar -->
+    <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black bg-opacity-70 backdrop-blur-md rounded-full border border-gray-600 shadow-lg px-6 py-3">
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="pill-btn pill-btn-home">
+                <span class="text-sm font-medium">Home</span>
+            </a>
+            <a href="about.html" class="pill-btn pill-btn-active">
+                <span class="text-sm font-medium">About</span>
+            </a>
+            <a href="fots.html" class="pill-btn pill-btn-special">
+                <span class="text-sm font-medium">Check it out</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center min-h-screen text-white p-4 sm:p-8 pt-20 sm:pt-24">
         <div class="max-w-4xl text-center animate__animated animate__fadeIn">
-            <h1 class="text-6xl font-bold mb-4">About FTOS</h1>
-            <p class="text-xl text-gray-300 mb-8">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">About FTOS</h1>
+            <p class="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8">
                 FTOS is a browser extension designed to save you from the tedious task of reading long and complicated Terms of Service documents.
             </p>
-            <div class="text-left space-y-4 text-lg">
+            <div class="text-left space-y-4 text-base sm:text-lg">
                 <p>We believe that users should have a clear understanding of the agreements they enter into online. Our tool uses AI to scan, analyze, and summarize any TOS document you encounter. It provides a concise summary and a simple ranking, highlighting any potential red flags or user-unfriendly clauses.</p>
                 <p>Our mission is to bring transparency and clarity to the web, one click at a time.</p>
             </div>
-            <a href="index.html" class="github-btn github-btn-primary mt-12">
-                <span>Back to Home</span>
-                 <svg class="arrow-container ml-2" viewBox="0 0 16 16" aria-hidden="true">
-                     <path class="arrow-head" d="M7.28033 3.21967C6.98744 2.92678 6.51256 2.92678 6.21967 3.21967C5.92678 3.51256 5.92678 3.98744 6.21967 4.28033L7.28033 3.21967ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.21967 11.7197C5.92678 12.0126 5.92678 12.4874 6.21967 12.7803C6.51256 13.0732 6.98744 13.0732 7.28033 12.7803L6.21967 11.7197ZM6.21967 4.28033L10.4697 8.53033L11.5303 7.46967L7.28033 3.21967L6.21967 4.28033ZM10.4697 7.46967L6.21967 11.7197L7.28033 12.7803L11.5303 8.53033L10.4697 7.46967Z" transform="rotate(180 8.5 8)"/>
-                     <path class="arrow-stem" d="M14.25 8H5" transform="rotate(180 9.625 8)"/>
-                 </svg>
-            </a>
         </div>
     </div>
 </body>
@@ -41,83 +49,95 @@
         margin-left: 10px;
     }
     
-    .github-btn {
+    /* Pill Navigation Styles */
+    .pill-btn {
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 12px 24px;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 6px;
-        border: 1px solid;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
         cursor: pointer;
         text-decoration: none;
         transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-        overflow: hidden;
+        white-space: nowrap;
     }
     
-    .github-btn:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.1),
-            transparent
-        );
-        transition: right 0.5s;
+    .pill-btn-home {
+        color: #e5e7eb;
     }
     
-    .github-btn:hover:before {
-        right: 100%;
-    }
-    
-    .github-btn-primary {
-        background: #3b82f6;
-        border-color: #3b82f6;
+    .pill-btn-home:hover {
+        background: rgba(255, 255, 255, 0.1);
         color: white;
     }
     
-    .github-btn-primary:hover {
-        background: #2563eb;
-        border-color: #2563eb;
-        transform: translateY(-1px);
+    .pill-btn-active {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
     }
     
-    .github-btn:active {
-        transform: translateY(0);
+    .pill-btn-special {
+        background: #FFD700;
+        color: #333333;
+    }
+    
+    .pill-btn-special:hover {
+        background: #DAA520;
+        transform: translateY(-1px);
     }
 
-    .arrow-container {
-        width: 20px;
-        height: 20px;
-        transition: transform 0.3s ease;
+    /* Media Queries */
+    @media (max-width: 639px) {
+        nav {
+            padding: 8px 16px;
+        }
+        
+        .pill-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        .text-left.space-y-4 {
+            margin-left: 0;
+            text-align: center;
+        }
     }
 
-    .arrow-head {
-        fill: currentColor;
+    @media (max-width: 480px) {
+        nav {
+            top: 16px;
+            padding: 6px 12px;
+        }
+        
+        .pill-btn {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+        
+        nav .flex {
+            gap: 8px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        .text-left.space-y-4 p {
+            font-size: 16px;
+        }
     }
 
-    .arrow-stem {
-        stroke: currentColor;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-        transform-origin: 11px 50%;
-        transform: scaleX(0);
-        transition: transform 0.2s ease;
-    }
-
-    .github-btn:hover .arrow-stem {
-        transform: scaleX(1);
-    }
-
-    .github-btn:hover .arrow-container {
-        transform: translateX(-5px);
+    @media (max-width: 360px) {
+        .pill-btn span {
+            font-size: 10px;
+        }
+        
+        nav {
+            padding: 4px 8px;
+        }
     }
 </style>
 </html> 

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTOS - Terms of Service Summarizer</title>
+    <link rel="icon" type="image/png" href="../tab logo .png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../tab logo .png" sizes="16x16">
+    <link rel="shortcut icon" type="image/png" href="../tab logo .png" sizes="32x32">
+    <link rel="apple-touch-icon" type="image/png" href="../tab logo .png" sizes="180x180">
     <!-- import tailwind css -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- import jquery -->
@@ -12,6 +16,7 @@
 </head>
 <body>
     <div class="flex flex-col items-center justify-center h-screen text-white px-4">
+
         <h1 class="text-4xl sm:text-6xl lg:text-8xl font-bold animate__animated animate__fadeInDown animate__fast mb-4 text-center" id="heading">FTOS</h1>
         <p class="text-lg sm:text-xl text-gray-300 mb-8 animate__animated animate__fadeInUp animate__delay-1s text-center max-w-2xl">Never read another TOS document again</p>
         
@@ -41,6 +46,28 @@
         background-position: center;
         background-repeat: no-repeat;
         overscroll-behavior: none;
+    }
+
+    /* Logo styles */
+    .logo-container {
+        text-align: center;
+    }
+
+    .website-logo {
+        max-width: 80px;
+        max-height: 80px;
+        width: auto;
+        height: auto;
+        border-radius: 8px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        transition: transform 0.3s ease;
+        background: transparent;
+        background-color: transparent;
+        mix-blend-mode: multiply;
+    }
+
+    .website-logo:hover {
+        transform: scale(1.05);
     }
     
     /* GitHub-style button effects */
@@ -149,6 +176,11 @@
             width: 20px;
             height: 20px;
         }
+
+        .website-logo {
+            max-width: 100px;
+            max-height: 100px;
+        }
     }
 
     @media (max-width: 639px) {
@@ -156,12 +188,22 @@
             width: 100%;
             justify-content: center;
         }
+
+        .website-logo {
+            max-width: 60px;
+            max-height: 60px;
+        }
     }
 
     @media (max-width: 360px) {
         .github-btn {
             padding: 8px 16px;
             font-size: 12px;
+        }
+
+        .website-logo {
+            max-width: 50px;
+            max-height: 50px;
         }
     }
 </style>

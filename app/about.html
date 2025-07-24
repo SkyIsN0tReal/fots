@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About FTOS</title>
+    <link rel="icon" type="image/png" href="../tab logo .png">
+    <link rel="shortcut icon" type="image/png" href="../tab logo .png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-    <!-- Floating Pill Navbar -->
-    <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black bg-opacity-70 backdrop-blur-md rounded-full border border-gray-600 shadow-lg px-6 py-3">
+    <!-- Separate Logo and Navigation Pills -->
+    <!-- Logo Pill -->
+    <nav class="fixed top-4 left-4 z-50 bg-black bg-opacity-70 backdrop-blur-md rounded-full border border-gray-600 shadow-lg px-2 py-2">
+        <a href="index.html" class="navbar-logo-link">
+            <img src="website logo.png" alt="FTOS Logo" class="navbar-logo">
+        </a>
+    </nav>
+
+    <!-- Navigation Buttons Pill -->
+    <nav class="fixed top-4 right-4 z-50 bg-black bg-opacity-70 backdrop-blur-md rounded-full border border-gray-600 shadow-lg px-6 py-3">
         <div class="flex items-center space-x-4">
-            <a href="index.html" class="pill-btn pill-btn-home">
-                <span class="text-sm font-medium">Home</span>
-            </a>
             <a href="about.html" class="pill-btn pill-btn-active">
                 <span class="text-sm font-medium">About</span>
             </a>
@@ -47,6 +54,36 @@
     .text-left.space-y-4.text-lg {
         text-align: left;
         margin-left: 10px;
+    }
+    
+    /* Navbar Width Styles */
+    .navbar-wide {
+        width: 190%; /* Increased by 90% */
+        max-width: 600px; /* Prevent it from getting too wide on large screens */
+    }
+
+    /* Navbar Logo Styles */
+    .navbar-logo {
+        height: 50px;
+        width: 50px;
+        border-radius: 8px;
+        background: transparent;
+        background-color: transparent;
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .navbar-logo-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .navbar-logo-link:hover .navbar-logo {
+        transform: scale(1.05);
+        filter: brightness(1.1);
     }
     
     /* Pill Navigation Styles */
